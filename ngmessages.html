@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta chrset="UTF 8">
+    <title>Event Registration</title>
+</head>
+
+<body ng-app="DemoApp" ng-controller="DemoController">
+<!--<script src="https://code.angularjs.org/1.6.9/angular-route.js"></script>-->
+<script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+
+<h1> Guru99 Global Event</h1>
+<form name="myForm">
+    <label>
+      Enter your name:
+      <input type="text"
+             name="myName"
+             ng-model="name"
+             ng-minlength="5"
+             ng-maxlength="20"
+             required />
+    </label>
+    <pre>myForm.myName.$error = {{ myForm.myName.$error | json }}</pre>
+  
+    <div ng-messages="myForm.myName.$error" style="color:maroon" role="alert">
+      <div ng-message="required">You did not enter a field</div>
+      <div ng-message="minlength">Your field is too short</div>
+      <div ng-message="maxlength">Your field is too long</div>
+      <div ng-message-default>This field has an input error</div>
+    </div>
+  </form>
+  <script>
+    var app = angular.module("DemoApp",[]);
+
+    app.controller("DemoController",function($scope) {
+        $scope.user="";
+            $scope.display=function(){
+                alert($scope.user);
+            }
+       
+    });
+</script>
+</body>
+</html>

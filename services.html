@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta chrset="UTF 8">
+    <title>Services Angular</title>
+</head>
+<body>
+<!--<script src="https://code.angularjs.org/1.6.9/angular-route.js"></script>-->
+<script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+
+<h1> Custom Directive</h1>
+<div ng-app="DemoApp" ng-controller="DemoController">
+<form name="myForm" novalidate>
+    
+    <p style="color:blueviolet">USER Name in Parent:
+        </br>
+        <input type="text" name="user" ng-model="user" required>
+        
+    </p>
+        
+</form>
+<input type="submit" ng-disabled="myForm.user.$invalid" ng-click="display(user)">
+</div>
+<script>
+    var app = angular.module("DemoApp",[]);
+    app.factory('myFactory', function() {
+    var obj = {};
+    obj.getData = function (url) {
+   return fetch(url)
+   /* .then(res => res.json())
+    .then(data => obj.getdata= data)
+    .catch(err => {
+    console.log("failed to", err);
+    });
+    return obj.getdata;*/
+    }
+    return obj;
+    });
+    app.controller("DemoController",function($scope, myFactory) {
+        $scope.data = myFactory.getData('https://api.unsplash.com/photos/?client_id=f41a28eee4478bed0a228a9bf7e719ac72f1afd856fe4960d27f6975aa8d21f1');
+        //console.log($scope.data);
+        $scope.data.then((data) =>
+       data.json()
+        ).then(data=>{
+            console.log(data);
+        });
+        $scope.user="dixita";
+            $scope.display=function(user){
+                alert(user);
+            }
+       
+    });
+   
+  
+</script>
+</body>
+</html>
+
+
+
+
+  

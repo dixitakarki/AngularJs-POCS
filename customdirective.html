@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta chrset="UTF 8">
+    <title>Event Registration</title>
+</head>
+
+<body>
+<!--<script src="https://code.angularjs.org/1.6.9/angular-route.js"></script>-->
+<script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+
+<h1> Custom Directive</h1>
+<div ng-app="DemoApp" ng-controller="DemoController">
+<form name="myForm" novalidate>
+    
+    <p style="color:blueviolet">USER Name in Parent:
+        {{user}}</br>
+        <input type="text" name="user" ng-model="user" required>
+    </p>
+        
+</form>
+<my-directive user="{{user}}" display="display(user)"></my-directive></br></br>
+<input type="submit" ng-disabled="myForm.user.$invalid" ng-click="display(user)">
+</div>
+<script>
+    var app = angular.module("DemoApp",[]);
+
+    app.controller("DemoController",function($scope) {
+        $scope.user="dixita";
+            $scope.display=function(user){
+                alert(user);
+            }
+       
+    });
+    app.directive('myDirective',function(){
+        return {
+            restrict: "E",
+            scope : {user:'@',display:'&'
+            },
+            template : '<div>User Name In Directive: {{user}}</div>'+'<input type="text" ng-model="user" />'+
+            "<button ng-click='display({user:user})'>click me</button>"
+            };
+    });
+</script>
+</body>
+</html>
